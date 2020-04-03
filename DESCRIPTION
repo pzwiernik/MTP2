@@ -1,10 +1,10 @@
 Package: mtp2
 Type: Package
-Title: What the package does (short line)
+Title: Working with totally positive distributions.
 Version: 1.0
 Date: 2017-01-10
-Author: Who wrote it
-Maintainer: Who to complain to <yourfault@somewhere.net>
+Author: Piotr Zwiernik
+Maintainer: Piotr Zwiernik <pior.zwiernik@gmail.com>
 Description: More about what it does (maybe more than one line)
 License: What license is it under?
 RoxygenNote: 5.0.1

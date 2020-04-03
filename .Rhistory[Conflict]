@@ -1,0 +1,512 @@
+library(mtp2)
+coord2K(S)
+library(mtp2)
+library(mtp2)
+coord2K(S)
+coord2K(S,K0=solve(CLmatrix(S)))
+library(mtp2)
+?Wmatrix
+document()
+library(roxygen2)
+library(devtools)
+document()
+library(mtp2)
+?Wmatrix
+S
+S <- cov(carcass)
+D <- diag(7)
+D[7,7] <- -1
+S <- D%*%S%*%D
+S
+cov(carcass)
+cov2cor(S)
+S <- matrix(c(1,0.3,-0.11,0.3,0.3,1,0.1,-0.1,-0.11,0.1,1,0.1,0.3,-0.1,0.1,1),4,4)
+coord2Sig(S)
+library(mtp2)
+coord2Sig(S)
+0.03*2-0.03^2
+0.03*2-0.03^2+0.03^4
+0.03*2-2*0.03^2
+0.03*2-4*0.03^2
+0.3^2+0.1^2-2*0.3*0.1
+0.3^2+0.1^2
+0.3^2+0.1^2-0.3*0.1
+0.3^2+0.1^2
+S <- matrix(c(1,0.5217252,0.8936672,0.6392168,0.5217252,1,0.1847040,0.7215024,0.8936672,0.1847040,1,0.5968196,0.6392168,0.7215024,0.5968196,1),4,4)
+coord2Sig(S)
+S
+CLmatrix(S)
+Wmatrix(S)
+0.8936672*0.6392168
+0.7215024*0.5968196
+0.5217252*0.8936672
+0.4306068+0.4662487+0.1847040
+0.5217252*0.6392168*0.5968196
+0.4306068+0.4662487+0.1847040+0.1990367
+1500*exp(-15*0.090534)
+install.packages("sBIC")
+install.packages(c("manipulate", "Matrix", "mgcv", "survival"))
+library(sBIC)
+X = read.table("lopeswest.dat", header = TRUE)
+X = as.matrix(X[, c("U.S.A.", "Canada", "Yen", "Franc", "Lira", "Mark")])
+Y = scale(diff(X))
+data(sBIC)
+d = read.table("http://www.stanford.edu/class/psych253/data/personality0.txt")
+S <- cor(d)
+S
+nrow(S)
+solve(S[1:10,1:10])
+R <- cov2cor(S)
+R1 <- cor(dat)
+R2 <- cor(dat2)
+d = read.table("http://www.stanford.edu/class/psych253/data/personality0.txt")
+head(d)
+library(corrplot)
+install.packages("corrplot")
+library(corrplot)
+corrplot(cor(d), order = "hclust", tl.col='black', tl.cex=.75)
+S <- cov(d)
+SS <- diag(CLsigns(S))
+dat <- as.matrix(d)%*%SS
+dimnames(dat) <- dimnames(d)
+library(mtp2)
+d = read.table("http://www.stanford.edu/class/psych253/data/personality0.txt")
+head(d)
+library(corrplot)
+S <- cov(d)
+SS <- diag(CLsigns(S))
+library(mtp2)
+SS <- diag(CLsigns(S))
+library(mtp2)
+SS <- diag(CLsigns(S))
+dat <- as.matrix(d)%*%SS
+dimnames(dat) <- dimnames(d)
+corrplot(cor(dat), order = "hclust", tl.col='black', tl.cex=.75)
+SS2 <- rep(1,32)
+SS2[c(16,9,21,3,11,23,31,19,5,7,14,25,1,30,27,28)] <- -1
+dat2 <- as.matrix(d)%*%diag(SS2)
+dimnames(dat2) <- dimnames(d)
+corrplot(cor(dat2), order = "hclust", tl.col='black', tl.cex=.75)
+R <- cov2cor(S)
+R1 <- cor(dat)
+R2 <- cor(dat2)
+K <- coord2K(R)[[1]]
+K1 <- coord2K(R1)[[1]]
+K2 <- coord2K(R2)[[1]]
+log(det(K))-sum(diag(R%*%K))
+log(det(K1))-sum(diag(R1%*%K1))
+log(det(K2))-sum(diag(R2%*%K2))
+-log(det(R))-32
+2*(-14.37563--17.05122)
+2*(-14.37563+17.05122)
+2*(-14.37563+19.63866)
+C <- CLmatrix(S,positive=TRUE)
+edges <- c()
+for (i in 1:(p-1)){
+for (j in (i+1):p){
+if (S[i,j]>=C[i,j]) edges <- c(edges,i,j)
+}
+}
+ecg <- igraph::make_empty_graph(p)%>%
+add_edges(edges) %>%
+set_edge_attr("color", value = "black")
+ecg <- igraph::make_empty_graph(p)%>%
+igraph::add_edges(edges) %>%
+igraph::set_edge_attr("color", value = "black")
+ecg <- igraph::make_empty_graph(p) igraph::%>%
+igraph::add_edges(edges) igraph::%>%
+igraph::set_edge_attr("color", value = "black")
+ecg <- igraph::make_empty_graph(p) %>%
+igraph::add_edges(edges) %>%
+igraph::set_edge_attr("color", value = "black")
+ecg <- igraph::make_empty_graph(p)
+ecg <- igraph::add_edges(edges)
+ecg <- igraph::add_edges(ecg,edges)
+plot(ecg)
+ecg <- igraph::make_empty_graph(p)
+ecg <- igraph::add_edges(ecg,edges,attr="undirected")
+ecg <- igraph::make_empty_graph(p)
+ecg <- igraph::as.undirected(igraph::add_edges(ecg,edges))
+plot(ecg)
+S
+p
+p <- nrow(S)
+p
+edges <- c()
+p <- nrow(S)
+for (i in 1:(p-1)){
+for (j in (i+1):p){
+if (S[i,j]>=C[i,j]) edges <- c(edges,i,j)
+}
+}
+ecg <- igraph::make_empty_graph(p)
+ecg <- igraph::as.undirected(igraph::add_edges(ecg,edges))
+plot(ecg)
+G <- igraph::graph_from_adjacency_matrix(1*(K< -tol),mode="undirected")
+tol=1e-6
+G <- igraph::graph_from_adjacency_matrix(1*(K< -tol),mode="undirected")
+G %m% ecg
+library(igraph)
+G %m% ecg
+ecg %m% G
+T <- MWSF(S,positive=TRUE)
+ecg %m% T
+G %m% T
+T %m% G
+T %m% ecg
+is.connected(T)
+S
+C
+G %m% ecg
+S[7,21]
+S[7,21]-C[7,21]
+S[8,24]-C[8,24]
+tol=1e-8
+edges <- c()
+p <- nrow(S)
+for (i in 1:(p-1)){
+for (j in (i+1):p){
+if (S[i,j]-C[i,j])>=tol edges <- c(edges,i,j)
+}
+}
+edges <- c()
+p <- nrow(S)
+for (i in 1:(p-1)){
+for (j in (i+1):p){
+if (S[i,j]-C[i,j]>= -tol) edges <- c(edges,i,j)
+}
+}
+ecg <- igraph::make_empty_graph(p)
+ecg <- igraph::as.undirected(igraph::add_edges(ecg,edges))
+G %m% ecg
+E(G %m% ecg)
+E(G %m% ecg)==emptyset
+as.list(E(G %m% ecg))
+size(E(G %m% ecg))
+dim(E(G %m% ecg))
+sum(E(G %m% ecg))
+ecount(G %m% ecg)
+print("Something is wrong")
+print("Something is wrong. The three graphs are not nested.")
+igraph::ecount(igraph::difference(G,T))
+igraph::ecount(igraph::difference(T,G))
+igraph::ecount(igraph::difference(G,ecg))
+library(mtp2)
+graphK(R,K)
+library(mtp2)
+graphK(R,K)
+graphK(R1,K1)
+graphK(R2,K2)
+library(mtp2)
+graphK(R,K)
+library(mtp2)
+graphK(R,K)
+graphK(R2,K2)
+library(mtp2)
+graphK(R2,K2)
+rev(pal3)
+install.packages('RColorBrewer')
+library('RColorBrewer')
+display.brewer.all()
+display.brewer.pal(8, "Set3")
+display.brewer.all()
+display.brewer.pal(8, "Spectral")
+display.brewer.pal(10, "Spectral")
+display.brewer.pal(20, "Spectral")
+pal3 <- brewer.pal(10, "Set3")
+pal3
+display.brewer.pal(10, "Set3")
+display.brewer.pal(10, "Set1")
+display.brewer.pal(3, "Set1")
+display.brewer.pal(5, "Set1")
+display.brewer.pal(15, "Set1")
+display.brewer.pal(10, "Set3")
+pal3 <- brewer.pal(10, "Set3")
+pal[9]
+pal3[9]
+pal3[5]
+pal3[4]
+library(mtp2)
+graphK(R2,K2)
+pal3 <- brewer.pal(10, "Spectral")
+pal3
+display(pal3)
+display.brewer.pal(10, "Spectral")
+pal3[9]
+pal3[2]
+library(mtp2)
+graphK(R2,K2)
+igraph::E(ecg)
+summary(igraph::E(ecg))
+attrs(igraph::E(ecg))
+edge.betweenness
+?edge.betweenness
+library(mtp2)
+graphK(R2,K2)
+library(mtp2)
+graphK(R2,K2)
+library(mtp2)
+graphK(R2,K2)
+library(mtp2)
+graphK(R2,K2)
+library(mtp2)
+graphK(R2,K2)
+igraph::E(ecg)$weight
+igraph::E(ecg)$weigth
+igraph::E(ecg)$pupa
+ecg
+igraph::E(ecg)$color
+library(mtp2)
+graphK(R2,K2)
+library(mtp2)
+graphK(R2,K2)
+library(mtp2)
+graphK(R2,K2)
+library(mtp2)
+graphK(R2,K2)
+library(mtp2)
+graphK(R2,K2)
+library(mtp2)
+graphK(R2,K2)
+corrplot(cor(dat), order = "hclust", tl.col='black', tl.cex=.75)
+corrplot(cor(dat2), order = "hclust", tl.col='black', tl.cex=.75)
+corrplot(cor(d), order = "hclust", tl.col='black', tl.cex=.75)
+corrplot(cor(dat), order = "hclust", tl.col='black', tl.cex=.75)
+corrplot(cor(d), order = "hclust", tl.col='black', tl.cex=.75)
+corrplot(cor(d), order = "hclust", tl.col='black', tl.cex=.75)
+corrplot(cor(dat2), order = "hclust", tl.col='black', tl.cex=.75)
+corrplot(cor(dat), order = "hclust", tl.col='black', tl.cex=.75)
+log(det(K))-sum(diag(R%*%K))
+log(det(K1))-sum(diag(R1%*%K1))
+log(det(K2))-sum(diag(R2%*%K2))
+-log(det(R))-p
+2*(-14.37563+17.05122)
+2*(-14.37563+19.63866)
+graphK(S,K)
+graphK(S1,K1)
+graphK(R1,K1)
+graphK(R2,K2)
+library(mtp2)
+graphK(R2,K2)
+K2[28,]
+K2[29,]
+plot(igraph::graph_from_adjacency_matrix(1*(K2< -tol),mode="undirected"))
+igraph::E(igraph::graph_from_adjacency_matrix(1*(K2< -tol),mode="undirected"))
+graphK(R2,K2)
+S <- R2
+K <- K2
+G <- igraph::graph_from_adjacency_matrix(1*(K< -tol),mode="undirected")
+plot(G)
+is.connected(G)
+T <- MWSF(S,positive=TRUE)
+plot(T)
+C <- CLmatrix(S,positive=TRUE)
+edges <- c()
+p <- nrow(S)
+for (i in 1:(p-1)){
+for (j in (i+1):p){
+if (S[i,j]-C[i,j]>= -tol) edges <- c(edges,i,j)
+}
+}
+ecg <- igraph::make_empty_graph(p)
+ecg <- igraph::as.undirected(igraph::add_edges(ecg,edges))
+plot(ecg)
+igraph::E(ecg)$color <- "#C9C9C9"
+igraph::E(G)
+igraph::E(ecg)[igraph::E(G)]$color <- "#3288BD"
+plot(ecg)
+igraph::E(G)
+E(ecg)[igraph::E(G)]
+igraph::E(G)
+E(ecg)
+E(ecg)$id
+E(G)$id
+E(ecg)[igraph::E(G)]$color
+E(ecg)
+E(ecg)[1]
+E(ecg)[2]
+E(ecg)[2][1]
+as.list(E(ecg)[2])
+as.vector(E(ecg)[2])
+E(ecg)[2]
+E(ecg)[2]$id
+E(ecg)[2]
+edge(E(ecg)[2])
+edges(E(ecg))
+E(ecg)[1]==E(ecg)[2]
+E(ecg)[1]==E(ecg)[1]
+which(E[ecg]==E[G])
+?which
+E(ecg)[igraph::E(G)]
+E(ecg)
+E(ecg) %in% E(G)
+E(G) %in% E(ecg)
+E(ecg) %in% E(G)
+get.edges(G)
+?get.edges
+get.edges(G,E(G))
+get.edges(ecg,E(G))
+get.edges(G,E(G)) %in% get.edges(ecg,E(ecg))
+get.edges(ecg,E(ecg)) %in% get.edges(G,E(G))
+get.edges(ecg,E(ecg))
+apply(get.edges(ecg,E(ecg)), 1, %in%, get.edges(G,E(G)))
+?element
+?%in%
+nrow(get.edges(ecg))
+nrow(get.edges(ecg,E(ecg)))
+edg <- igraph::get.edges(ecg,E(ecg))
+Gedges <- igraph::get.edges(G,E(G))
+Tedges <- igraph::get.edges(T,E(T))
+for (i in 1:edg){
+if (edg[i] %in% Tedges) {
+igraph::E(ecg)[i]$color <- "#D53E4F"
+igraph::E(ecg)[i]$width <- 3
+}
+else if (edg[i] %in% Gedges){
+igraph::E(ecg)[i]$color <- "#D53E4F"
+igraph::E(ecg)[i]$width <- 2
+}
+}
+for (i in 1:nrow(edg)){
+if (edg[i,] %in% Tedges) {
+igraph::E(ecg)[i]$color <- "#D53E4F"
+igraph::E(ecg)[i]$width <- 3
+}
+else if (edg[i,] %in% Gedges){
+igraph::E(ecg)[i]$color <- "#D53E4F"
+igraph::E(ecg)[i]$width <- 2
+}
+}
+i <- 1
+Tedges
+edg[i,] %in% Tedges
+apply(Tedges, 1, function(x, want) isTRUE(all.equal(x, want)), edg(i))
+apply(Tedges, 1, function(x, want) isTRUE(all.equal(x, want)), edg[i,])
+TRUE %in% apply(Tedges, 1, function(x, want) isTRUE(all.equal(x, want)), edg[i,])
+TRUE %in% apply(Gedges, 1, function(x, want) isTRUE(all.equal(x, want)), edg[i,])
+apply(Gedges, 1, function(x, want) isTRUE(all.equal(x, want)), edg[i,])
+edg <- igraph::get.edges(ecg,E(ecg))
+Gedges <- igraph::get.edges(G,E(G))
+Tedges <- igraph::get.edges(T,E(T))
+igraph::E(ecg)$color <- "#C9C9C9"
+igraph::E(ecg)$width<- 1
+for (i in 1:nrow(edg)){
+if (TRUE %in% apply(Tedges, 1, function(x, want) isTRUE(all.equal(x, want)), edg[i,])) {
+igraph::E(ecg)[i]$color <- "#D53E4F"
+igraph::E(ecg)[i]$width <- 3
+}
+else if (TRUE %in% apply(Gedges, 1, function(x, want) isTRUE(all.equal(x, want)), edg[i,])){
+igraph::E(ecg)[i]$color <- "#D53E4F"
+igraph::E(ecg)[i]$width <- 2
+}
+}
+igraph::plot.igraph(ecg,layout=layout_nicely)
+igraph::E(ecg)$color <- "#C9C9C9"
+igraph::E(ecg)$width<- 1
+for (i in 1:nrow(edg)){
+if (TRUE %in% apply(Tedges, 1, function(x, want) isTRUE(all.equal(x, want)), edg[i,])) {
+igraph::E(ecg)[i]$color <- "#D53E4F"
+igraph::E(ecg)[i]$width <- 3
+}
+else if (TRUE %in% apply(Gedges, 1, function(x, want) isTRUE(all.equal(x, want)), edg[i,])){
+igraph::E(ecg)[i]$color <- "#3288BD"
+igraph::E(ecg)[i]$width <- 2
+}
+}
+igraph::plot.igraph(ecg,layout=layout_nicely)
+library(mtp2)
+graphK(R,K)
+d = read.table("http://www.stanford.edu/class/psych253/data/personality0.txt")
+library(corrplot)
+S <- cov(d)
+SS <- diag(CLsigns(S))
+dat <- as.matrix(d)%*%SS
+dimnames(dat) <- dimnames(d)
+SS2 <- rep(1,32)
+SS2[c(16,9,21,3,11,23,31,19,5,7,14,25,1,30,27,28)] <- -1
+dat2 <- as.matrix(d)%*%diag(SS2)
+dimnames(dat2) <- dimnames(d)
+R <- cov2cor(S)
+R1 <- cor(dat)
+R2 <- cor(dat2)
+K <- coord2K(R)[[1]]
+K1 <- coord2K(R1)[[1]]
+K2 <- coord2K(R2)[[1]]
+log(det(K))-sum(diag(R%*%K))
+log(det(K1))-sum(diag(R1%*%K1))
+log(det(K2))-sum(diag(R2%*%K2))
+-log(det(R))-p
+-log(det(R))-32
+graph(R,K)
+graphK(R,K)
+?array
+array(0,c(2,2,2))
+coord2K(S)
+S <- matrix(c(1,0.3,-0.11,0.3,0.3,1,0.1,-0.1,-0.11,0.1,1,0.1,0.3,-0.1,0.1,1),4,4)
+likes <- array(0,c(2,2,2))
+for (i in 0:1){
+for (j in 0:1){
+for (k in 0:1){
+D <- diag(c(1,(-1)^i,(-1)^j,(-1)^k))
+K <- coord2K(D%*%S%*%D)[[1]]
+likes[i,j,k] <- log(det(K))-sum(diag(D%*%S%*%D%*%K))
+}
+}
+}
+coord2K(S)
+likes
+likes <- array(0,c(2,2,2))
+for (i in 0:1){
+for (j in 0:1){
+for (k in 0:1){
+D <- diag(c(1,(-1)^i,(-1)^j,(-1)^k))
+K <- coord2K(D%*%S%*%D)[[1]]
+likes[i+1,j+1,k+1] <- log(det(K))-sum(diag(D%*%S%*%D%*%K))
+}
+}
+}
+likes
+graphK(S,K)
+graphK(D%*%S%*%,K)
+graphK(D%*%S%*%D,K)
+d
+likes]
+likes
+(-1)^i
+i
+(-1)^0
+corrplot(cor(dat2), order = "hclust", tl.col='black', tl.cex=.75)
+dat2$lax
+dat2[lax,]
+dimnames(dat2)
+dat2[,lax]
+dat2[,"lax"]
+dat2[1:2,-"lax"]
+dat2[,"lax"]-dat2[,28]
+dat2[1:2,-28]
+corrplot(cor(dat2[,-28]), order = "hclust", tl.col='black', tl.cex=.75)
+colnames(dat2)
+corrplot(cor(dat2[,-c(28,29)]), order = "hclust", tl.col='black', tl.cex=.75)
+corrplot(cor(dat2[,-c(27,28,29)]), order = "hclust", tl.col='black', tl.cex=.75)
+corrplot(cor(dat2[,-c(27,28,29,32)]), order = "hclust", tl.col='black', tl.cex=.75)
+corrplot(cor(dat2[,-c(10,27,28,29,32)]), order = "hclust", tl.col='black', tl.cex=.75)
+G <- igraph::graph_from_adjacency_matrix(1*(K< -1e-10),mode="undirected")
+G1 <- igraph::graph_from_adjacency_matrix(1*(K1< -1e-10),mode="undirected")
+G2 <- igraph::graph_from_adjacency_matrix(1*(K2< -1e-10),mode="undirected")
+library(igraph)
+corrplot(cov2cor(solve(cor(dat))), order = "hclust", tl.col='black', tl.cex=.75)
+corrplot(cor(dat), order = "hclust", tl.col='black', tl.cex=.75)
+corrplot(cor(dat2[,-c(19,5,29,7,32,10)]), order = "hclust", tl.col='black', tl.cex=.75)
+corrplot(cor(dat2[,-c(19,5,29,7,32,10,27,28)]), order = "hclust", tl.col='black', tl.cex=.75)
+corrplot(cov2cor(solvecor(dat2[,-c(19,5,29,7,32,10,27,28)])), order = "hclust", tl.col='black', tl.cex=.75)
+corrplot(cov2cor(solve(cor(dat2[,-c(19,5,29,7,32,10,27,28)])), order = "hclust", tl.col='black', tl.cex=.75)
+##### SOME SIMULATIONS TO GET AN IDEA ABOUT HOW OFTEN WE GET AN MTP2 DISTRIBUTION
+# for different n,p, rho generate wishart with K=(1+rho)*I-rho*11
+iters <- 100
+k <- 10
+p <- 3
+rho <- 0.5/(p-1)
+n <- k*p
+Sig <- solve((1+rho)*diag(p)-rho*outer(rep(1,p),rep(1,p)))
+S <- rWishart(iters,n,Sig)
+corrplot(cov2cor(solve(cor(dat2[,-c(19,5,29,7,32,10,27,28)]))), order = "hclust", tl.col='black', tl.cex=.75)

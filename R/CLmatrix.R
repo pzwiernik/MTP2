@@ -8,7 +8,6 @@
 #' @keywords Chow-Liu algorithm, minimum cost spanning tree
 #' @export
 #' @examples
-#' library(gRbase)
 #' data(carcass)
 #' S <- cov(carcass)[1:6,1:6]
 #' C <- CLmatrix(S)

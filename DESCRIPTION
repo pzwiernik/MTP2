@@ -4,8 +4,7 @@ Title: Working with Gaussian totally positive distributions.
 Version: 1.0
 Date: 2017-01-10
 Author: Piotr Zwiernik
-Maintainer: Piotr Zwiernik <pior.zwiernik@gmail.com>
-Description: The package implements methods developed in 
-Lauritzen, S., Uhler, C., & Zwiernik, P. (2019). Maximum likelihood estimation in Gaussian models under total positivity. The Annals of Statistics, 47(4), 1835-1863.
+Maintainer: Piotr Zwiernik <piotr.zwiernik@gmail.com>
+Description: The package implements methods developed in Lauritzen, S., Uhler, C., & Zwiernik, P. (2019). Maximum likelihood estimation in Gaussian models under total positivity. The Annals of Statistics, 47(4), 1835-1863.
 License: What license is it under?
 RoxygenNote: 5.0.1

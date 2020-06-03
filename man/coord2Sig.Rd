@@ -14,6 +14,8 @@ coord2Sig(S, n = 1, Sig0 = S, tol = 1e-10, graph = FALSE)
 \item{Sig0}{starting point of the algorithm}
 
 \item{tol}{convergence criterion sum(abs(Sig-Sig0))<tol}
+
+\item{graph}{a graph to which the procedure restricts. If FALSE, the complete graph is taken.}
 }
 \description{
 This function implements a simple coordinate descent algorithm to find the maximum likelihood estimator over
@@ -31,4 +33,3 @@ coord2Sig(S)
 \keyword{covariance}
 \keyword{descent,}
 \keyword{matrix.}
-

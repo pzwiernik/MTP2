@@ -10,7 +10,7 @@ CLsigns(S)
 \item{S}{a sample covariance matrix}
 }
 \description{
-omputes the Chow-Liu estimate or the positive Chow-Liu estimate in which 
+Computes the Chow-Liu estimate or the positive Chow-Liu estimate in which 
 case only nonnnegative entries of S are taken into account. The Chow-Liu estimate 
 corresponds to the maximum likelihood over all Gaussian tree models.
 }
@@ -25,4 +25,3 @@ corresponds to the maximum likelihood over all Gaussian tree models.
 \keyword{minimum}
 \keyword{spanning}
 \keyword{tree}
-

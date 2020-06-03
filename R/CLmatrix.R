@@ -8,10 +8,8 @@
 #' @keywords Chow-Liu algorithm, minimum cost spanning tree
 #' @export
 #' @examples
-#' data(carcass)
-#' S <- cov(carcass)[1:6,1:6]
+#' S <- matrix(c(11.376,0.745,8.446,2.066,7.686, -0.759,0.745, 33.069,0.672, 36.047,2.016, 32.059,8.446,0.672,8.937,0.315,6.864, -0.598,2.066, 36.047,0.315, 51.939,2.187, 41.587,7.686,2.016,6.864,2.187,7.645,0.384, -0.759, 32.059, -0.598, 41.587,0.384, 41.560),6,6)
 #' C <- CLmatrix(S)
-#' graphK(solve(C))
 CLmatrix <- function(S,positive=TRUE){
   p <- nrow(S)
   R <- cov2cor(S)

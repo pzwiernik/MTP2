@@ -4,7 +4,6 @@
 #' of freedom and the corresponding p-value.
 #' @param K an M-matrix that maximizes the likelihood
 #' @param LR the value of the likelihood ratio statistics with respect to the unconstrained model
-#' @param n the sample size
 #' @param tol numbers greater than -tol in K are treated as zero (default 1e-8)
 #' @keywords xxx
 #' @export

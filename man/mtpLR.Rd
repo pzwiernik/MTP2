@@ -12,8 +12,6 @@ mtpLR(K, LR, tol = 1e-10)
 \item{LR}{the value of the likelihood ratio statistics with respect to the unconstrained model}
 
 \item{tol}{numbers greater than -tol in K are treated as zero (default 1e-8)}
-
-\item{n}{the sample size}
 }
 \description{
 Internal funciton that computes the likelihood ratio statistics to test the MTP constraints. It also returns the degrees 
@@ -23,4 +21,3 @@ of freedom and the corresponding p-value.
 
 }
 \keyword{xxx}
-

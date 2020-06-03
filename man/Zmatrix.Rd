@@ -2,14 +2,12 @@
 % Please edit documentation in R/Zmatrix.R
 \name{Zmatrix}
 \alias{Zmatrix}
-\title{The graphs of an M-matrix}
+\title{Computes the Z-matrix}
 \usage{
 Zmatrix(S)
 }
 \arguments{
-\item{K}{an M-matrix}
-
-\item{tol}{numbers greater than -tol are treated as zero}
+\item{S}{a covariance matrix}
 }
 \description{
 This function oututs the Z matrix, that is, the unique dominating ultrametric.
@@ -18,4 +16,3 @@ This function oututs the Z matrix, that is, the unique dominating ultrametric.
 
 }
 \keyword{xxx}
-

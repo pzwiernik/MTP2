@@ -20,4 +20,3 @@ Computes the W matrix as introduced in the discussion of Lauritzen, Uhler, Zwier
 \keyword{matrix}
 \keyword{path,}
 \keyword{shortest}
-

@@ -2,6 +2,7 @@
 
 export(CLmatrix)
 export(CLsigns)
+export(MPFit)
 export(MWSF)
 export(Wmatrix)
 export(Zmatrix)
@@ -10,4 +11,3 @@ export(coord2Sig)
 export(graphK)
 export(is.M)
 export(mtpLR)
-export(viol3)

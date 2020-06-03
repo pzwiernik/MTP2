@@ -4,7 +4,9 @@
 #' Small negative numbers are treated as zero.
 #' @param S the sample covariance matrix
 #' @param K an M-matrix
+#' @param names a vector with the names of the  variables
 #' @param tol numbers greater than -tol are treated as zero
+#' @param root to fix a root
 #' @keywords xxx
 #' @export
 #' @examples

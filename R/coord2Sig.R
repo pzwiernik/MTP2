@@ -7,6 +7,7 @@
 #' @param n the sample size (default 1)
 #' @param Sig0 starting point of the algorithm
 #' @param tol convergence criterion sum(abs(Sig-Sig0))<tol
+#' @param graph a graph to which the procedure restricts. If FALSE, the complete graph is taken.
 #' @keywords coordinate descent, covariance matrix.
 #' @export
 #' @examples

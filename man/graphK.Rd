@@ -11,7 +11,11 @@ graphK(S, K, names = FALSE, tol = 1e-10, root = c())
 
 \item{K}{an M-matrix}
 
+\item{names}{a vector with the names of the  variables}
+
 \item{tol}{numbers greater than -tol are treated as zero}
+
+\item{root}{to fix a root}
 }
 \description{
 Plots the graph representing the support of an M-matrix. 
@@ -21,4 +25,3 @@ Small negative numbers are treated as zero.
 
 }
 \keyword{xxx}
-

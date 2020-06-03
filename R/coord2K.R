@@ -23,7 +23,7 @@ K0 <- 2*K
 it <- 0
 
 if (p==2){
-  return(K=solve(matrix(c(S[1,1],max(c(S[1,2],0)),max(c(S[1,2],0)),S[2,2]),2,2)))
+  return(list(K=solve(matrix(c(S[1,1],max(c(S[1,2],0)),max(c(S[1,2],0)),S[2,2]),2,2))))
 }
 
 while (sum(abs(K-K0))>tol){

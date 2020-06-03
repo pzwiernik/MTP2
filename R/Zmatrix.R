@@ -1,8 +1,7 @@
-#' The graphs of an M-matrix
+#' Computes the Z-matrix
 #'
 #' This function oututs the Z matrix, that is, the unique dominating ultrametric.
-#' @param K an M-matrix
-#' @param tol numbers greater than -tol are treated as zero
+#' @param S a covariance matrix
 #' @keywords xxx
 #' @export
 #' @examples

@@ -22,6 +22,10 @@ K <- K0
 K0 <- 2*K
 it <- 0
 
+if (p==2){
+  return(K=solve(matrix(c(S[1,1],max(c(S[1,2],0)),max(c(S[1,2],0)),S[2,2]),2,2)))
+}
+
 while (sum(abs(K-K0))>tol){
 K0 <- K
 it <- it+1
@@ -42,7 +46,7 @@ for (i in 1:(p-1)){
 LR <- n*(-log(det(S))-log(det(K)))
 dimnames(K) <- dimnames(S)
 if (n==1) {
-  return(list(K,it,(n/2)*(log(det(K))-sum(diag(S%*%K))),print("Sample size not provided")))
+  return(list(K=K,it,(n/2)*(log(det(K))-sum(diag(S%*%K)))))
 }
-else return(list(K,it,(n/2)*(log(det(K))-sum(diag(S%*%K))),mtpLR(K,LR)))
+else return(list(K=K,it,(n/2)*(log(det(K))-sum(diag(S%*%K))),mtpLR(K,LR)))
 }

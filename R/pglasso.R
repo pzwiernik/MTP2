@@ -28,7 +28,7 @@ pglasso <- function(S,rho,tol=1e-7,pos.constr=TRUE){
   t <- 1
   mm <- max(abs(Z-S))
   if (mm>0){
-    t <- rho/max(abs(Z-S))
+    t <- min(1,rho/max(abs(Z-S)))
   }
   Sig <- (1-t)*S+t*Z # this is the starting point
   K <- solve(Sig)

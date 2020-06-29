@@ -47,7 +47,7 @@ coord2Sig <- function(S,n=1,Sig0=S,tol=1e-10,graph=FALSE){
   LR <- n*(-log(det(S))+log(det(Sig)))
   dimnames(Sig) <- dimnames(S)
   if (n==1) {
-    return(list(Sig,it,(n/2)*(-log(det(Sig))-p),print("Sample size not provided")))
+    return(list(Sig=Sig,it=it,llike=(n/2)*(-log(det(Sig))-p),print("Sample size not provided")))
   }
-  else return(list(Sig,it,(n/2)*(-log(det(Sig))-p),mtpLR(solve(Sig),LR)))
+  else return(list(Sig=Sig,it=it,llike=(n/2)*(-log(det(Sig))-p),mtpLR(solve(Sig),LR)))
 }

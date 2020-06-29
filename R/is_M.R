@@ -12,3 +12,9 @@ is.M <- function(K,tol=1e-10){
   p <- nrow(K)
   return(prod(1*(K<= 1e-10)+diag(p)))
 }
+
+is.IM <- function(S,tol=1e-10){
+  p <- nrow(S)
+  K <- solve(S)
+  return(prod(1*(K<= 1e-10)+diag(p)))
+}

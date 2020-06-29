@@ -1,6 +1,6 @@
 #' The W matrix
 #'
-#' Computes the W matrix as introduced in the discussion of Lauritzen, Uhler, Zwiernik (2017).
+#' Computes the W matrix as introduced in Section 4.2 of Lauritzen, Uhler, Zwiernik (2017).
 #' @param S a sample covariance matrix
 #' @keywords shortest path, W matrix
 #' @export

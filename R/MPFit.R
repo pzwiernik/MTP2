@@ -5,7 +5,7 @@
 #' @param cliques the list ov vectors with indices of cliques
 #' @param S the sample covariance matrix
 #' @param n the sample size (default 1), relevant for testing 
-#' @param tol the convergence tolerance (default tol=1e-8)
+#' @param tol the convergence tolerance (default tol=1e-7)
 #' @param skelstart if TRUE first a 1-skeleton model is fitted and used as the starting point (default FALSE) 
 #' @return the optimal value of the concentration matrix
 #' @return the number of iterations the algorithm needed to converge

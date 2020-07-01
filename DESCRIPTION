@@ -12,4 +12,5 @@ Imports:
     Matrix,
     igraph,
     gRbase,
-    gRim
+    gRim,
+    quadprog

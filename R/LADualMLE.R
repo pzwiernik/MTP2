@@ -3,7 +3,6 @@
 #' This function implements a simple coordinate descent algorithm to find the maximum likelihood estimator over
 #' Gaussian MTP2 distributions. For details see Lauritzen, Uhler, Zwiernik (2017).
 #' @param W inverse of the sample covariance matrix ???
-#' @param edges the list of edges that should be updated
 #' @param tol the convergence tolerance (default tol=1e-8)
 #' @return the optimal value of the concentration matrix
 #' @return the number of iterations the algorithm needed to converge

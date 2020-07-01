@@ -7,7 +7,7 @@ Author: Piotr Zwiernik
 Maintainer: Piotr Zwiernik <piotr.zwiernik@gmail.com>
 Description: The package implements methods developed in Lauritzen, S., Uhler, C., & Zwiernik, P. (2019). Maximum likelihood estimation in Gaussian models under total positivity. The Annals of Statistics, 47(4), 1835-1863.
 License: GPL-2
-RoxygenNote: 7.1.0
+RoxygenNote: 7.1.1
 Imports:
     Matrix,
     igraph,

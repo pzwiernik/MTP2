@@ -10,7 +10,7 @@ Wmatrix(S)
 \item{S}{a sample covariance matrix}
 }
 \description{
-Computes the W matrix as introduced in the discussion of Lauritzen, Uhler, Zwiernik (2017).
+Computes the W matrix as introduced in Section 4.2 of Lauritzen, Uhler, Zwiernik (2017).
 }
 \examples{
 

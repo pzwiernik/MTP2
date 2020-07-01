@@ -3,7 +3,7 @@
 #' This function implements a simple block-coordinate descent algorithm to find the maximum of the regularized
 #' Gaussiann log-likelihood. The  penalty  term involves the negative partial correlations.
 #' @param S the sample covariance matrix
-#' @param rho positive penalty
+#' @param rho positive penalty (can be Inf)
 #' @param tol the convergence tolerance (default tol=1e-8)
 #' @param pos.constr if TRUE (default) penalizes positive K_ij, if FALSE performs the standard dual graphical lasso.
 #' @return the optimal value of the concentration matrix
@@ -18,19 +18,22 @@
 pglasso <- function(S,rho,tol=1e-7,pos.constr=TRUE){
   d <- nrow(S)
   #compute the starting point
+  cat("Computing the starting point..")
   if (pos.constr==FALSE){
     Z <- diag(diag(S))
-    cat("** The algorithm maximizes the penalized log-likelihood function with the standard glasso penalty.\n\n")
+    cat("** The algorithm maximizes the penalized log-likelihood function with the standard glasso penalty.\n")
 } else {
     Z <- Zmatrix(S)
-    cat("** The algorithm maximizes the penalized log-likelihood function with the positive glasso penalty.\n\n")
+    cat("** The algorithm maximizes the penalized log-likelihood function with the positive glasso penalty.\n")
 }
+  cat("..")
   t <- 1
   mm <- max(abs(Z-S))
-  if (mm>0){
+  if (mm>0 && rho<Inf){
     t <- min(1,rho/max(abs(Z-S)))
   }
   Sig <- (1-t)*S+t*Z # this is the starting point
+  cat(" DONE\n")
   K <- solve(Sig)
   it <- 0
   cat("The algorithm stops when the dual gap is below: ",tol,"\b.\n\n")
@@ -56,6 +59,6 @@ pglasso <- function(S,rho,tol=1e-7,pos.constr=TRUE){
     }
     cat(it,"\t  | ",dualgap,"\n")
   }
-  return(list(K=K,it=it))
+  return(list(K=(K+t(K))/2,it=it))
 }
 

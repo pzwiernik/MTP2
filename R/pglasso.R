@@ -17,14 +17,17 @@
 ##### Algorithm 3
 pglasso <- function(S,rho,tol=1e-7,pos.constr=TRUE){
   d <- nrow(S)
+  if (pos.constr==FALSE){
+    cat("** The algorithm maximizes the penalized log-likelihood function with the standard glasso penalty.\n")
+  } else {
+    cat("** The algorithm maximizes the penalized log-likelihood function with the positive glasso penalty.\n")
+  }
   #compute the starting point
   cat("Computing the starting point..")
   if (pos.constr==FALSE){
     Z <- diag(diag(S))
-    cat("** The algorithm maximizes the penalized log-likelihood function with the standard glasso penalty.\n")
 } else {
     Z <- Zmatrix(S)
-    cat("** The algorithm maximizes the penalized log-likelihood function with the positive glasso penalty.\n")
 }
   cat("..")
   t <- 1
@@ -34,6 +37,7 @@ pglasso <- function(S,rho,tol=1e-7,pos.constr=TRUE){
   }
   Sig <- (1-t)*S+t*Z # this is the starting point
   cat(" DONE\n")
+  
   K <- solve(Sig)
   it <- 0
   cat("The algorithm stops when the dual gap is below: ",tol,"\b.\n\n")

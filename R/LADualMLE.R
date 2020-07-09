@@ -10,7 +10,7 @@
 #' @keywords coordinate descent, concentration matrix.
 #' @export
 #' @examples
-#' 
+#' print(TRUE)
 #' 
 LADualMLE <- function(W, tol=1e-8){
   AM <- (abs(W)>1e-8)
@@ -32,7 +32,7 @@ LADualMLE <- function(W, tol=1e-8){
     for (j in 1:d){
       A <- rbind(diag(d)[zeros[[j]],-j],-diag(d)[nonzeros[[j]],-j])
       b <- c(W[j,zeros[[j]]],-W[j,nonzeros[[j]]])
-      y <- solve.QP(Dmat=solve(K[-j,-j]),dvec=rep(0,d-1),Amat=t(A),bvec=b,meq=length(zeros[[j]]))$solution
+      y <- quadprog::solve.QP(Dmat=solve(K[-j,-j]),dvec=rep(0,d-1),Amat=t(A),bvec=b,meq=length(zeros[[j]]))$solution
       K[j,-j] <- K[-j,j] <- y
     }
     Shat  <- solve(K)

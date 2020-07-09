@@ -9,7 +9,8 @@
 #' @param root to fix a root
 #' @keywords xxx
 #' @export
-#' @examples
+#' @examples 
+#' print(TRUE)
 #' 
 graphK <- function(S,K,names=FALSE,tol=1e-10,root=c()){
   p <- nrow(S)
@@ -20,7 +21,7 @@ graphK <- function(S,K,names=FALSE,tol=1e-10,root=c()){
   G <- igraph::graph_from_adjacency_matrix(1*(K< -tol),mode="undirected")
   # the MWSF
   T <- MWSF(S,positive=TRUE)
-  V(T)$name <- V(G)$name
+  igraph::V(T)$name <- igraph::V(G)$name
   # the excessive correlation graph
   C <- CLmatrix(S,positive=TRUE)
   edges <- c()
@@ -31,7 +32,7 @@ graphK <- function(S,K,names=FALSE,tol=1e-10,root=c()){
   }
   ecg <- igraph::make_empty_graph(p) 
   ecg <- igraph::as.undirected(igraph::add_edges(ecg,edges))
-  V(ecg)$name <- V(G)$name
+  igraph::V(ecg)$name <- igraph::V(G)$name
   
   # check if the graphs are nested as predicted by the theory (numerical issues still possible)
   if (igraph::ecount(igraph::difference(T,G))>0 || igraph::ecount(igraph::difference(G,ecg))>0) {

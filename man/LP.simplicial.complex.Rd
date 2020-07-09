@@ -20,7 +20,7 @@ Locally positive simplicial complex of a covariance matrix.
 This function gives the set of all subblocks C for which Sigma[C,C] is an inverse M-matrix
 }
 \examples{
-
+print(TRUE)
 
 }
 \keyword{M-subblocks,}

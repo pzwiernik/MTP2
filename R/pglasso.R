@@ -14,7 +14,7 @@
 #' @keywords coordinate descent, concentration matrix.
 #' @export
 #' @examples
-#' 
+#' print(TRUE)
 #' 
 ##### Algorithm 3
 pglasso <- function(S,rho=NULL, L=NULL,U=NULL,tol=1e-7,pos.constr=TRUE){
@@ -33,7 +33,7 @@ pglasso <- function(S,rho=NULL, L=NULL,U=NULL,tol=1e-7,pos.constr=TRUE){
   } else {
     if (is.null(L)||is.null(U)){
       cat("Error: You need to specify  the  penalty parameter(s).\n")
-      break()
+      return()
     }
     cat("** The algorithm maximizes the penalized log-likelihood function with the general LU-penalty.\n")
   }
@@ -48,7 +48,7 @@ pglasso <- function(S,rho=NULL, L=NULL,U=NULL,tol=1e-7,pos.constr=TRUE){
     } else {
       if (min(U+diag(d))==0){
         cat("\n \n **Warning: This combination of L,U is not supported unless S is PD..\n")
-        break()
+        return()
       }
       Z <- Zmatrix(S)
     }
@@ -77,7 +77,7 @@ pglasso <- function(S,rho=NULL, L=NULL,U=NULL,tol=1e-7,pos.constr=TRUE){
     for (j in 1:d){
       A <- rbind(diag(d-1),-diag(d-1))
       b <- c(S[j,-j]+L[j,-j],-(S[j,-j]+U[j,-j]))
-      y <- solve.QP(Dmat=solve(Sig[-j,-j]),dvec=rep(0,d-1),Amat=t(A),bvec=b)$solution
+      y <- quadprog::solve.QP(Dmat=solve(Sig[-j,-j]),dvec=rep(0,d-1),Amat=t(A),bvec=b)$solution
       Sig[j,-j] <- Sig[-j,j] <- y
     }
     it <- it+1

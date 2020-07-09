@@ -8,10 +8,10 @@
 #' @keywords xxx
 #' @export
 #' @examples
-#' 
+#' print(TRUE)
 mtpLR <- function(K,LR,tol=1e-10){
   p <- nrow(K)
   G <- igraph::graph_from_adjacency_matrix(1*(K< -tol),mode="undirected")
   df <- p*(p-1)/2-nrow(igraph::get.edges(G,igraph::E(G)))
-  return(list(LR,df,pchisq(LR,df)))
+  return(list(LR,df,stats::pchisq(LR,df)))
 }

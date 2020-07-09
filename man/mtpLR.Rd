@@ -18,6 +18,6 @@ Internal funciton that computes the likelihood ratio statistics to test the MTP 
 of freedom and the corresponding p-value.
 }
 \examples{
-
+print(TRUE)
 }
 \keyword{xxx}

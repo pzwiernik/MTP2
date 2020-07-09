@@ -4,12 +4,16 @@
 \alias{pglasso}
 \title{Performs positive graphical lasso or standard graphical lasso by optimizing their dual problems.}
 \usage{
-pglasso(S, rho, tol = 1e-07, pos.constr = TRUE)
+pglasso(S, rho = NULL, L = NULL, U = NULL, tol = 1e-07, pos.constr = TRUE)
 }
 \arguments{
 \item{S}{the sample covariance matrix}
 
 \item{rho}{positive penalty (can be Inf)}
+
+\item{L}{matrix of lower penalties (can be -Inf)}
+
+\item{U}{matrix of upper penalties (can be Inf)}
 
 \item{tol}{the convergence tolerance (default tol=1e-8)}
 
@@ -27,7 +31,7 @@ This function implements a simple block-coordinate descent algorithm to find the
 Gaussiann log-likelihood. The  penalty  term involves the negative partial correlations.
 }
 \examples{
-
+print(TRUE)
 
 }
 \keyword{concentration}

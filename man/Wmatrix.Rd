@@ -13,7 +13,7 @@ Wmatrix(S)
 Computes the W matrix as introduced in Section 4.2 of Lauritzen, Uhler, Zwiernik (2017).
 }
 \examples{
-
+print(TRUE)
 
 }
 \keyword{W}

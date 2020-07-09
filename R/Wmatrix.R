@@ -5,11 +5,11 @@
 #' @keywords shortest path, W matrix
 #' @export
 #' @examples
-#' 
+#' print(TRUE)
 #' 
 Wmatrix <- function(S){
   p <- nrow(S)
-  R <- cov2cor(S)
+  R <- stats::cov2cor(S)
   # Compute the distances. Non-positive correlations correspond to very big distances.
   D <- matrix(0,p,p)
     for (i in 1:(p-1)){

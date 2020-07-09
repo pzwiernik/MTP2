@@ -12,7 +12,7 @@
 #' @keywords coordinate descent, concentration matrix.
 #' @export
 #' @examples
-#' 
+#' print(TRUE)
 #' 
 ##### Algorithm 3
 EPlasso <- function(S,lambda,tol=1e-7,pos.constr=TRUE){
@@ -36,12 +36,12 @@ EPlasso <- function(S,lambda,tol=1e-7,pos.constr=TRUE){
         b <- c(-lambda+S[j,-j],-lambda-S[j,-j])
         meq=0
       }
-      y <- solve.QP(Dmat=solve(Sig[-j,-j]),dvec=rep(0,d-1),Amat=t(A),bvec=b,meq=meq)$solution
+      y <- quadprog::solve.QP(Dmat=solve(Sig[-j,-j]),dvec=rep(0,d-1),Amat=t(A),bvec=b,meq=meq)$solution
       Sig[j,-j] <- Sig[-j,j] <- y
     }
     K <- solve(Sig)
     print(sum(diag(S%*%K))-d+lambda*sum(abs(K)))
   }
-  return(list(K=K,it=it))
+  return(list(K=K))
 }
 

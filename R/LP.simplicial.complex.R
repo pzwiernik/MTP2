@@ -6,7 +6,7 @@
 #' @keywords inverse M-subblocks, simplicial complex, local positivity
 #' @export
 #' @examples
-#' 
+#' print(TRUE)
 #' 
 LP.simplicial.complex <- function(S,tol=1e-7){
   d <- nrow(S)
@@ -15,10 +15,10 @@ LP.simplicial.complex <- function(S,tol=1e-7){
   for (k in 2:d){
     toremove <- list()
     Deltai <- list()
-    for (C in combn(V, k, simplify = FALSE)){
-      if ((combn(C, k-1, simplify = FALSE) %in% Delta) && is.M(solve(S[C,C]))) {
+    for (C in utils::combn(V, k, simplify = FALSE)){
+      if ((utils::combn(C, k-1, simplify = FALSE) %in% Delta) && is.M(solve(S[C,C]))) {
         Deltai <- append(Deltai,list(C))
-        toremove <- append(toremove,combn(C, k-1, simplify = FALSE))}
+        toremove <- append(toremove,utils::combn(C, k-1, simplify = FALSE))}
     }
     Delta <- setdiff(Delta,toremove)
     Delta <- append(Delta,Deltai)

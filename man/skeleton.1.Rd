@@ -21,7 +21,7 @@ This function implements a simple coordinate descent algorithm to find the maxim
 Gaussian MTP2 distributions. For details see Lauritzen, Uhler, Zwiernik (2017).
 }
 \examples{
-
+print(TRUE)
 
 }
 \keyword{concentration}

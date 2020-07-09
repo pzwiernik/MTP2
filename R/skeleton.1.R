@@ -9,12 +9,12 @@
 #' @keywords coordinate descent, concentration matrix.
 #' @export
 #' @examples
-#' 
+#' print(TRUE)
 #' 
 skeleton.1 <- function(simplices){
   skel <- list()
   for (C in simplices){
-    skel <- append(skel,combn(C,2,simplify=FALSE))
+    skel <- append(skel,utils::combn(C,2,simplify=FALSE))
   }
   return(unique(skel))
 }

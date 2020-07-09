@@ -25,8 +25,6 @@ coord2Sig <- function(S,n=1,Sig0=S,tol=1e-10,graph=FALSE){
   # start with G, the complete graph
   Sig0 <- 2*Sig
   it <- 0
-#  R <- cov2cor(S)
-#  Z <- Zmatrix(S)
   while (sum(abs(Sig-Sig0))>tol){
     Sig0 <- Sig
     it <- it+1
@@ -35,14 +33,11 @@ coord2Sig <- function(S,n=1,Sig0=S,tol=1e-10,graph=FALSE){
         A <- union(i,j)
         B <- setdiff(1:p,A)
         L <- Sig[A,B]%*%solve(Sig[B,B])%*%Sig[B,A]
-        #if (max(c(L[1,2],S[i,j]))-Sig[i,j]>0.001) print(max(c(L[1,2],S[i,j]))-Sig[i,j])
         Sig[i,j] <- Sig[j,i] <- max(c(L[1,2],S[i,j]))
-       # if (is.M(solve(Sig))==1) print(it)
-#        print(R[i,j]-1e-6<=Sig[i,j] && Sig[i,j]<=Z[i,j]+1e-6)
       }
     }
   }
-  if (graph==TRUE) {graphK(solve(cov2cor(Sig)))}
+  if (graph==TRUE) {graphK(solve(stats::cov2cor(Sig)))}
   # output
   LR <- n*(-log(det(S))+log(det(Sig)))
   dimnames(Sig) <- dimnames(S)

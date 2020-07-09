@@ -5,14 +5,14 @@
 #' @keywords xxx
 #' @export
 #' @examples
-#' 
+#' print(TRUE)
 Zmatrix <- function(S){
   p <- nrow(S)
-  R <- cov2cor(S)
+  R <- stats::cov2cor(S)
   # Compute the distances. Non-positive correlations correspond to very big distances.
-  D <- as.dist(-log((R>0)*R+(R<=0)*1e-20))
+  D <- stats::as.dist(-log((R>0)*R+(R<=0)*1e-20))
   # use single-linkage clustering method in R
-  hcl <- hclust(D,method="single")
+  hcl <- stats::hclust(D,method="single")
   # recover how hclust merges variables and use it to recover the corresponding ultrametric 
   subs <- list()
   length(subs) <- p-1

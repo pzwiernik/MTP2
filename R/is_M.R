@@ -6,7 +6,7 @@
 #' @keywords M-matrix
 #' @export
 #' @examples
-#' 
+#' print(TRUE)
 #' 
 is.M <- function(K,tol=1e-10){
   p <- nrow(K)

@@ -13,6 +13,6 @@ Zmatrix(S)
 This function oututs the Z matrix, that is, the unique dominating ultrametric.
 }
 \examples{
-
+print(TRUE)
 }
 \keyword{xxx}

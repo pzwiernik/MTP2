@@ -12,7 +12,7 @@
 #' @keywords coordinate descent, concentration matrix.
 #' @export
 #' @examples
-#' 
+#' print(TRUE)
 #' 
 ##### Algorithm 3
 coord2K <- function(S,n=1,K0=solve(diag(diag(S))),tol=1e-8){

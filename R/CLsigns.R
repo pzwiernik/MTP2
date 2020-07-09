@@ -6,7 +6,8 @@
 #' @param S a sample covariance matrix
 #' @keywords Chow-Liu algorithm, minimum cost spanning tree
 #' @export
-#' @examples
+#' @examples 
+#' print(TRUE)
 #' 
 #' 
 #' 

@@ -15,6 +15,7 @@ case only nonnnegative entries of S are taken into account. The Chow-Liu estimat
 corresponds to the maximum likelihood over all Gaussian tree models.
 }
 \examples{
+print(TRUE)
 
 
 

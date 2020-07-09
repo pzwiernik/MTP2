@@ -22,6 +22,7 @@ Plots the graph representing the support of an M-matrix.
 Small negative numbers are treated as zero.
 }
 \examples{
+print(TRUE)
 
 }
 \keyword{xxx}

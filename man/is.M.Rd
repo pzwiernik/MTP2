@@ -15,7 +15,7 @@ is.M(K, tol = 1e-10)
 Checks if all entries of K are smaller than a small positive number tol
 }
 \examples{
-
+print(TRUE)
 
 }
 \keyword{M-matrix}

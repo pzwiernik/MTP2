@@ -20,7 +20,6 @@ LADualMLE <- function(W, tol=1e-8){
   cat("** The algorithm maximizes the dual log-likelihood with edge positivity constraints.\n\n")
   cat("* To establish convergence we track the  KKT conditions. Dual feasibility holds at each step.\n")
   cat("  All edge covariances must be >=",-tol,"\b.    Complementary slackness in each entry <=",tol,"\b.\n")
-  cat("Min. edge cov | Complementary slackness\n")
   Shat <- solve(K)
   zeros <- list()
   nonzeros <- list()
@@ -28,6 +27,7 @@ LADualMLE <- function(W, tol=1e-8){
     zeros[[j]] <- setdiff(which(abs(W[j,])<1e-8),j)
     nonzeros[[j]] <- setdiff(which(abs(W[j,])>=1e-8),j)
   }
+  cat("Min. edge cov | Complementary slackness\n")
   while (min(Shat*AM)< -tol || max(abs(Shat*(W-K)))>tol){
     for (j in 1:d){
       A <- rbind(diag(d)[zeros[[j]],-j],-diag(d)[nonzeros[[j]],-j])

@@ -28,7 +28,6 @@ pglasso <- function(S,rho=NULL, L=NULL,U=NULL,tol=1e-7,pos.constr=TRUE){
       cat("** The algorithm maximizes the penalized log-likelihood function with the positive glasso penalty.\n")
       L <- matrix(0,d,d)
       U <- rho*(matrix(1,d,d)-diag(d))
-      
     }
   } else {
     if (is.null(L)||is.null(U)){
@@ -37,6 +36,13 @@ pglasso <- function(S,rho=NULL, L=NULL,U=NULL,tol=1e-7,pos.constr=TRUE){
     }
     cat("** The algorithm maximizes the penalized log-likelihood function with the general LU-penalty.\n")
   }
+  # for computation of the dual gap we need to replace Inf with a large number etc
+  # in all other parts of the procedure we use L and U normally
+  L0 <- L
+  L0[which(L0==-Inf)]  <- -1e+5
+  U0 <- U
+  U0[which(U0==Inf)]  <- 1e+5
+  
   #compute the starting point
   if (min(eigen(S)$values)>0){
     cat("The algorithm starts at the sample covariance matrix.\n")
@@ -58,31 +64,27 @@ pglasso <- function(S,rho=NULL, L=NULL,U=NULL,tol=1e-7,pos.constr=TRUE){
       t <- t/2
     }
     Sig <- (1-t)*S+t*Z
-    # if (mm>0 && rho<Inf){
-    #   high <- U/(Z-S)
-    #   low <- L/(Z-S)
-    #   t <- min(1,min(high[which(Z>=S)],na.rm = TRUE),min(low[which((Z<S))],na.rm = TRUE))
-    # }
     Sig <- (1-t)*S+t*Z # this is the starting point
     cat(" DONE\n")
   }
-    
-
   K <- solve(Sig)
   it <- 0
   cat("\n The algorithm will stop when the dual gap is below: ",tol,"\b.\n\n")
   cat("Iteration | Dual Gap\n")
   dualgap <- Inf
-  while(dualgap > tol || it==0){
+  while(dualgap > tol){
     for (j in 1:d){
       A <- rbind(diag(d-1),-diag(d-1))
       b <- c(S[j,-j]+L[j,-j],-(S[j,-j]+U[j,-j]))
+      active <- which((b>-Inf & b<Inf)) 
+      A <- A[active,]
+      b <- b[active]
       y <- quadprog::solve.QP(Dmat=solve(Sig[-j,-j]),dvec=rep(0,d-1),Amat=t(A),bvec=b)$solution
       Sig[j,-j] <- Sig[-j,j] <- y
     }
     it <- it+1
     K <- solve(Sig)
-    dualgap <- sum(diag(S%*%K))-d+sum(pmax(L*K,U*K)) 
+    dualgap <- sum(diag(S%*%K))-d+sum(pmax(L0*K,U0*K)) 
     cat(it,"\t  | ",dualgap,"\n")
   }
   return(list(K=(K+t(K))/2,it=it))

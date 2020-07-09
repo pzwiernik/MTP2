@@ -4,6 +4,8 @@
 #' Gaussiann log-likelihood. The  penalty  term involves the negative partial correlations.
 #' @param S the sample covariance matrix
 #' @param rho positive penalty (can be Inf)
+#' @param L matrix of lower penalties (can be -Inf)
+#' @param U matrix of upper penalties (can be Inf)
 #' @param tol the convergence tolerance (default tol=1e-8)
 #' @param pos.constr if TRUE (default) penalizes positive K_ij, if FALSE performs the standard dual graphical lasso.
 #' @return the optimal value of the concentration matrix
@@ -15,52 +17,72 @@
 #' 
 #' 
 ##### Algorithm 3
-pglasso <- function(S,rho,tol=1e-7,pos.constr=TRUE){
+pglasso <- function(S,rho=NULL, L=NULL,U=NULL,tol=1e-7,pos.constr=TRUE){
   d <- nrow(S)
-  if (pos.constr==FALSE){
-    cat("** The algorithm maximizes the penalized log-likelihood function with the standard glasso penalty.\n")
+  if (is.null(rho)==FALSE){
+    if (pos.constr==FALSE){
+      cat("** The algorithm maximizes the penalized log-likelihood function with the standard glasso penalty.\n")
+      L <- -rho*(matrix(1,d,d)-diag(d))
+      U <- rho*(matrix(1,d,d)-diag(d))
+    } else {
+      cat("** The algorithm maximizes the penalized log-likelihood function with the positive glasso penalty.\n")
+      L <- matrix(0,d,d)
+      U <- rho*(matrix(1,d,d)-diag(d))
+      
+    }
   } else {
-    cat("** The algorithm maximizes the penalized log-likelihood function with the positive glasso penalty.\n")
+    if (is.null(L)||is.null(U)){
+      cat("Error: You need to specify  the  penalty parameter(s).\n")
+      break()
+    }
+    cat("** The algorithm maximizes the penalized log-likelihood function with the general LU-penalty.\n")
   }
   #compute the starting point
-  cat("Computing the starting point..")
-  if (pos.constr==FALSE){
-    Z <- diag(diag(S))
-} else {
-    Z <- Zmatrix(S)
-}
-  cat("..")
-  t <- 1
-  mm <- max(abs(Z-S))
-  if (mm>0 && rho<Inf){
-    t <- min(1,rho/max(abs(Z-S)))
+  if (min(eigen(S)$values)>0){
+    cat("The algorithm starts at the sample covariance matrix.\n")
+    Sig <- S
+  } else{
+    cat("S is not positive definite. Computing the starting point..")
+    if (pos.constr==FALSE || (min(U+diag(d))>0 && max(L-diag(d))<0)){
+      Z <- diag(diag(S))
+    } else {
+      if (min(U+diag(d))==0){
+        cat("\n \n **Warning: This combination of L,U is not supported unless S is PD..\n")
+        break()
+      }
+      Z <- Zmatrix(S)
+    }
+    cat("..")
+    t <- 1
+    while(!(min(L<=round(t*(Z-S),8)) && min(round(t*(Z-S),8)<=U))){
+      t <- t/2
+    }
+    Sig <- (1-t)*S+t*Z
+    # if (mm>0 && rho<Inf){
+    #   high <- U/(Z-S)
+    #   low <- L/(Z-S)
+    #   t <- min(1,min(high[which(Z>=S)],na.rm = TRUE),min(low[which((Z<S))],na.rm = TRUE))
+    # }
+    Sig <- (1-t)*S+t*Z # this is the starting point
+    cat(" DONE\n")
   }
-  Sig <- (1-t)*S+t*Z # this is the starting point
-  cat(" DONE\n")
-  
+    
+
   K <- solve(Sig)
   it <- 0
-  cat("The algorithm stops when the dual gap is below: ",tol,"\b.\n\n")
+  cat("\n The algorithm will stop when the dual gap is below: ",tol,"\b.\n\n")
   cat("Iteration | Dual Gap\n")
   dualgap <- Inf
   while(dualgap > tol || it==0){
     for (j in 1:d){
       A <- rbind(diag(d-1),-diag(d-1))
-      if (pos.constr==TRUE){
-        b <- c(S[j,-j],-rho-S[j,-j])
-      } else{
-        b <- c(S[j,-j]-rho,-rho-S[j,-j])
-      }
+      b <- c(S[j,-j]+L[j,-j],-(S[j,-j]+U[j,-j]))
       y <- solve.QP(Dmat=solve(Sig[-j,-j]),dvec=rep(0,d-1),Amat=t(A),bvec=b)$solution
       Sig[j,-j] <- Sig[-j,j] <- y
     }
     it <- it+1
     K <- solve(Sig)
-    if (pos.constr==TRUE){
-      dualgap <- sum(diag(S%*%K))-d+rho*sum((K-diag(diag(K)))*(K>0)) 
-    } else{
-      dualgap <- sum(diag(S%*%K))-d+rho*sum(abs(K-diag(diag(K)))) 
-    }
+    dualgap <- sum(diag(S%*%K))-d+sum(pmax(L*K,U*K)) 
     cat(it,"\t  | ",dualgap,"\n")
   }
   return(list(K=(K+t(K))/2,it=it))

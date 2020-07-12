@@ -39,9 +39,9 @@ pglasso <- function(S,rho=NULL, L=NULL,U=NULL,tol=1e-7,pos.constr=TRUE){
   # for computation of the dual gap we need to replace Inf with a large number etc
   # in all other parts of the procedure we use L and U normally
   L0 <- L
-  L0[which(L0==-Inf)]  <- -1e+5
+  L0[which(L0==-Inf)]  <- -1e+4
   U0 <- U
-  U0[which(U0==Inf)]  <- 1e+5
+  U0[which(U0==Inf)]  <- 1e+4
   
   #compute the starting point
   if (min(eigen(S)$values)>0){
@@ -84,7 +84,8 @@ pglasso <- function(S,rho=NULL, L=NULL,U=NULL,tol=1e-7,pos.constr=TRUE){
     }
     it <- it+1
     K <- solve(Sig)
-    dualgap <- sum(diag(S%*%K))-d+sum(pmax(L0*K,U0*K)) 
+    roundK <- K * (abs(K)>tol)
+    dualgap <- sum(S*roundK)-d+sum(pmax(L0*roundK,U0*roundK)) 
     cat(it,"\t  | ",dualgap,"\n")
   }
   return(list(K=(K+t(K))/2,it=it))

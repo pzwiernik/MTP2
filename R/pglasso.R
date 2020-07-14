@@ -84,10 +84,10 @@ pglasso <- function(S,rho=NULL, L=NULL,U=NULL,tol=1e-7,pos.constr=TRUE){
     }
     it <- it+1
     K <- solve(Sig)
-    roundK <- K * (abs(K)>tol)
-    dualgap <- sum(S*roundK)-d+sum(pmax(L0*roundK,U0*roundK)) 
+    #roundK <- K * (abs(K)>tol)
+    dualgap <- sum(S*K)-d+sum(pmax(L0*(abs(K)>tol)*K,U0*(abs(K)>tol)*K)) 
     cat(it,"\t  | ",dualgap,"\n")
   }
-  return(list(K=(K+t(K))/2,it=it))
+  return(list(K=(K+t(K))/2,Sig=(Sig+t(Sig))/2,it=it))
 }
 

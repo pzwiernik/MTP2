@@ -8,6 +8,7 @@
 #' @param U matrix of upper penalties (can be Inf)
 #' @param tol the convergence tolerance (default tol=1e-8)
 #' @param pos.constr if TRUE (default) penalizes positive K_ij, if FALSE performs the standard dual graphical lasso.
+#' @param output if TRUE (default) the output will be printed.
 #' @return the optimal value of the concentration matrix
 #' @return the number of iterations the algorithm needed to converge
 #' @return the corresponding value of the log-likelihood
@@ -17,24 +18,32 @@
 #' print(TRUE)
 #' 
 ##### Algorithm 3
-pglasso <- function(S,rho=NULL, L=NULL,U=NULL,tol=1e-7,pos.constr=TRUE){
+pglasso <- function(S,rho=NULL, L=NULL,U=NULL,tol=1e-7,pos.constr=TRUE,output=TRUE){
   d <- nrow(S)
   if (is.null(rho)==FALSE){
     if (pos.constr==FALSE){
-      cat("** The algorithm maximizes the penalized log-likelihood function with the standard glasso penalty.\n")
+      if (output==TRUE){
+        cat("** The algorithm maximizes the penalized log-likelihood function with the standard glasso penalty.\n")
+      }
       L <- -rho*(matrix(1,d,d)-diag(d))
       U <- rho*(matrix(1,d,d)-diag(d))
     } else {
-      cat("** The algorithm maximizes the penalized log-likelihood function with the positive glasso penalty.\n")
+      if (output==TRUE){
+        cat("** The algorithm maximizes the penalized log-likelihood function with the positive glasso penalty.\n")
+      }
       L <- matrix(0,d,d)
       U <- rho*(matrix(1,d,d)-diag(d))
     }
   } else {
     if (is.null(L)||is.null(U)){
-      cat("Error: You need to specify  the  penalty parameter(s).\n")
+      if (output==TRUE){
+        cat("Error: You need to specify  the  penalty parameter(s).\n")
+      }
       return()
     }
-    cat("** The algorithm maximizes the penalized log-likelihood function with the general LU-penalty.\n")
+    if (output==TRUE){
+      cat("** The algorithm maximizes the penalized log-likelihood function with the general LU-penalty.\n")
+    }
   }
   # for computation of the dual gap we need to replace Inf with a large number etc
   # in all other parts of the procedure we use L and U normally
@@ -45,32 +54,44 @@ pglasso <- function(S,rho=NULL, L=NULL,U=NULL,tol=1e-7,pos.constr=TRUE){
   
   #compute the starting point
   if (min(eigen(S)$values)>0){
-    cat("The algorithm starts at the sample covariance matrix.\n")
+    if (output==TRUE){
+      cat("The algorithm starts at the sample covariance matrix.\n")
+    }
     Sig <- S
   } else{
-    cat("S is not positive definite. Computing the starting point..")
+    if (output==TRUE){
+      cat("S is not positive definite. Computing the starting point..")
+    }
     if (pos.constr==FALSE || (min(U+diag(d))>0 && max(L-diag(d))<0)){
       Z <- diag(diag(S))
     } else {
       if (min(U+diag(d))==0){
-        cat("\n \n **Warning: This combination of L,U is not supported unless S is PD..\n")
+        if (output==TRUE){
+          cat("\n \n **Warning: This combination of L,U is not supported unless S is PD..\n")
+        }
         return()
       }
       Z <- Zmatrix(S)
     }
-    cat("..")
+    if (output==TRUE){
+      cat("..")
+    }
     t <- 1
     while(!(min(L<=round(t*(Z-S),8)) && min(round(t*(Z-S),8)<=U))){
       t <- t/2
     }
     Sig <- (1-t)*S+t*Z
     Sig <- (1-t)*S+t*Z # this is the starting point
-    cat(" DONE\n")
+    if (output==TRUE){
+      cat(" DONE\n")
+    }
   }
   K <- solve(Sig)
   it <- 0
-  cat("\n The algorithm will stop when the dual gap is below: ",tol,"\b.\n\n")
-  cat("Iteration | Dual Gap\n")
+  if (output==TRUE){
+    cat("\n The algorithm will stop when the dual gap is below: ",tol,"\b.\n\n")
+    cat("Iteration | Dual Gap\n")
+  }
   dualgap <- Inf
   while(dualgap > tol){
     for (j in 1:d){
@@ -86,7 +107,9 @@ pglasso <- function(S,rho=NULL, L=NULL,U=NULL,tol=1e-7,pos.constr=TRUE){
     K <- solve(Sig)
     #roundK <- K * (abs(K)>tol)
     dualgap <- sum(S*K)-d+sum(pmax(L0*(abs(K)>tol)*K,U0*(abs(K)>tol)*K)) 
-    cat(it,"\t  | ",dualgap,"\n")
+    if (output==TRUE){
+      cat(it,"\t  | ",dualgap,"\n")
+    }
   }
   return(list(K=(K+t(K))/2,Sig=(Sig+t(Sig))/2,it=it))
 }

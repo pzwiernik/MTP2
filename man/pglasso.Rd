@@ -4,7 +4,15 @@
 \alias{pglasso}
 \title{Performs positive graphical lasso or standard graphical lasso by optimizing their dual problems.}
 \usage{
-pglasso(S, rho = NULL, L = NULL, U = NULL, tol = 1e-07, pos.constr = TRUE)
+pglasso(
+  S,
+  rho = NULL,
+  L = NULL,
+  U = NULL,
+  tol = 1e-07,
+  pos.constr = TRUE,
+  output = TRUE
+)
 }
 \arguments{
 \item{S}{the sample covariance matrix}
@@ -18,6 +26,8 @@ pglasso(S, rho = NULL, L = NULL, U = NULL, tol = 1e-07, pos.constr = TRUE)
 \item{tol}{the convergence tolerance (default tol=1e-8)}
 
 \item{pos.constr}{if TRUE (default) penalizes positive K_ij, if FALSE performs the standard dual graphical lasso.}
+
+\item{output}{if TRUE (default) the output will be printed.}
 }
 \value{
 the optimal value of the concentration matrix

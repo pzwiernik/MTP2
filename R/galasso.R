@@ -1,7 +1,7 @@
-#' Performs positive graphical lasso or standard graphical lasso by optimizing their dual problems.
+#' Performs positive graphical assymetric lasso by optimizing its dual problems.
 #'
 #' This function implements a simple block-coordinate descent algorithm to find the maximum of the regularized
-#' Gaussiann log-likelihood. The  penalty  term involves the negative partial correlations.
+#' Gaussiann log-likelihood  with  a an assymetric penalty of lasso type.
 #' @param S the sample covariance matrix
 #' @param rho positive penalty (can be Inf)
 #' @param L matrix of lower penalties (can be -Inf)
@@ -18,7 +18,7 @@
 #' print(TRUE)
 #' 
 ##### Algorithm 3
-pglasso <- function(S,rho=NULL, L=NULL,U=NULL,tol=1e-7,pos.constr=TRUE,output=TRUE){
+galasso <- function(S,rho=NULL, L=NULL,U=NULL,tol=1e-7,pos.constr=TRUE,output=TRUE){
   d <- nrow(S)
   if (is.null(rho)==FALSE){
     if (pos.constr==FALSE){
@@ -53,7 +53,7 @@ pglasso <- function(S,rho=NULL, L=NULL,U=NULL,tol=1e-7,pos.constr=TRUE,output=TR
   U0[which(U0==Inf)]  <- 1e+4
   
   #compute the starting point
-  if (min(eigen(S)$values)>0){
+  if (min(eigen(S)$values)>1e-4){
     if (output==TRUE){
       cat("The algorithm starts at the sample covariance matrix.\n")
     }
@@ -66,9 +66,7 @@ pglasso <- function(S,rho=NULL, L=NULL,U=NULL,tol=1e-7,pos.constr=TRUE,output=TR
       Z <- diag(diag(S))
     } else {
       if (min(U+diag(d))==0){
-        if (output==TRUE){
-          cat("\n \n **Warning: This combination of L,U is not supported unless S is PD..\n")
-        }
+        cat("\n \n **Warning: This combination of L,U is not supported unless S is PD..\n")
         return()
       }
       Z <- Zmatrix(S)

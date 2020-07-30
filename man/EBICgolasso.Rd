@@ -2,7 +2,7 @@
 % Please edit documentation in R/EBICgolasso.R
 \name{EBICgolasso}
 \alias{EBICgolasso}
-\title{Finds  the optimal penalty parameter for graphical assymetric lasso using the EBIC criterion.}
+\title{Finds  the optimal penalty parameter for Graphical Oriented Lasso using the EBIC criterion.}
 \usage{
 EBICgolasso(
   S,
@@ -49,8 +49,8 @@ the number of iterations the algorithm needed to converge
 the corresponding value of the log-likelihood
 }
 \description{
-This function implements a simple block-coordinate descent algorithm to find the maximum of the regularized
-Gaussiann log-likelihood  with  a an assymetric penalty of lasso type.
+This function computes the EBIC criterion for a seried of rho parameters. The penalty matrices are $rho L$, $rho U$, 
+where L and U are fixed in  advance.
 }
 \examples{
 print(TRUE)

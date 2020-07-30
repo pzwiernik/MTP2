@@ -2,7 +2,7 @@
 % Please edit documentation in R/golasso.R
 \name{golasso}
 \alias{golasso}
-\title{Performs positive graphical assymetric lasso by optimizing its dual problems.}
+\title{Performs Graphical Oriented Lasso optimization by optimizing the dual problem.}
 \usage{
 golasso(
   S,

@@ -18,7 +18,7 @@
 #' print(TRUE)
 #' 
 ##### Algorithm 3
-galasso <- function(S,rho=NULL, L=NULL,U=NULL,tol=1e-7,pos.constr=TRUE,output=TRUE){
+golasso <- function(S,rho=NULL, L=NULL,U=NULL,tol=1e-7,pos.constr=TRUE,output=TRUE){
   d <- nrow(S)
   if (is.null(rho)==FALSE){
     if (pos.constr==FALSE){

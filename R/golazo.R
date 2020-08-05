@@ -47,11 +47,11 @@ golazo <- function(S,rho=NULL, L=NULL,U=NULL,tol=1e-7,pos.constr=TRUE,output=TRU
   }
   # for computation of the dual gap we need to replace Inf with a large number etc
   # in all other parts of the procedure we use L and U normally
-  L0 <- L
-  L0[which(L0==-Inf)]  <- -1e+4
-  U0 <- U
-  U0[which(U0==Inf)]  <- 1e+4
-  
+  L0 <- pmax(L,-sqrt(outer(diag(S+U),diag(S+U)))-S)
+  diag(L0) <- diag(L)
+  U0 <- pmin(U,sqrt(outer(diag(S+U),diag(S+U)))-S)
+  diag(U0) <- diag(U)
+
   #compute the starting point
   if (min(eigen(S)$values)>1e-4){
     if (output==TRUE){

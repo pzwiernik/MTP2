@@ -22,7 +22,7 @@
 #' print(TRUE)
 #' 
 ##### Algorithm 3
-EBICgolasso <- function(S,n=NULL,L= NULL,U=NULL,tol=1e-6,edge.tol=1e-4,gamma=0.5,rhomin=0.01,rhomax=1,nrhos=50,output=TRUE){
+EBICgolazo <- function(S,n=NULL,L= NULL,U=NULL,tol=1e-6,edge.tol=1e-4,gamma=0.5,rhomin=0.01,rhomax=1,nrhos=50,output=TRUE){
   # rhomax=1 makes a lot of sense if S is a correlation matrix
   d <- nrow(S)
   if (is.null(L)||is.null(U)){
@@ -38,7 +38,7 @@ EBICgolasso <- function(S,n=NULL,L= NULL,U=NULL,tol=1e-6,edge.tol=1e-4,gamma=0.5
   for (rho in rhos){
     LL <- rho*L
     UU <- rho*U
-    res <- golasso(S,L=LL,U=UU,output=FALSE)
+    res <- golazo(S,L=LL,U=UU,output=FALSE)
     # compute EBIC
     K <- res$K
     KR <- cov2cor(K) #to make edge count independend of scalings

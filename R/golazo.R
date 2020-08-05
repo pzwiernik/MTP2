@@ -1,4 +1,4 @@
-#' Performs Graphical Oriented Lasso optimization by optimizing the dual problem.
+#' Performs Graphical Oriented LAZy Optimization by optimizing the dual problem.
 #'
 #' This function implements a simple block-coordinate descent algorithm to find the maximum of the regularized
 #' Gaussiann log-likelihood  with  a an assymetric penalty of lasso type.
